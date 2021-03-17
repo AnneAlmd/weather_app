@@ -26,8 +26,29 @@ void main() {
         // act
         final result = WeatherModel.fromJson(jsonMap);
         //assert
-        expect(tWeatherModel, result);
+        expect(result, tWeatherModel);
       },
     );
   });
+  group(
+    'toJson',
+    () {
+      test(
+        'Should return a JSON map containing the proper data',
+        () async {
+          //act
+          final result = tWeatherModel.toJson();
+
+          //assert
+          final expectMap = {
+            "city": "London",
+            "temperature": "30",
+            "time": "00:00"
+          };
+
+          expect(result, expectMap);
+        },
+      );
+    },
+  );
 }
