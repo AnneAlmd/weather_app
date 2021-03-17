@@ -9,7 +9,7 @@ import 'package:weather_app/features/weather/domain/repositories/weather_reposit
 class GetWeather extends UseCase<Weather, Params> {
   final WheatherRepository repository;
 
-  GetWeather(@required this.repository);
+  GetWeather(this.repository);
 
   @override
   Future<Either<Failure, Weather>> call(Params params) async {
