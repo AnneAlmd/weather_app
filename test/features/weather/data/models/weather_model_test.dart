@@ -40,11 +40,7 @@ void main() {
           final result = tWeatherModel.toJson();
 
           //assert
-          final expectMap = {
-            "city": "London",
-            "temperature": "30",
-            "time": "00:00"
-          };
+          final expectMap = {"city": "London", "temp": 30, "time": "00:00"};
 
           expect(result, expectMap);
         },

@@ -11,7 +11,7 @@ class WeatherModel extends Weather {
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     return WeatherModel(
       city: json['city'],
-      temperature: json['temperature'],
+      temperature: json['temp'].toString(),
       time: json['time'],
       //DateTime.parse(json['time']),
     );
@@ -20,7 +20,7 @@ class WeatherModel extends Weather {
   Map<String, dynamic> toJson() {
     return {
       'city': city,
-      'temperature': temperature,
+      'temp': int.parse(temperature),
       'time': time,
     };
   }
