@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:meta/meta.dart';
+
 import 'package:weather_app/core/error/exceptions.dart';
 import 'package:weather_app/features/weather/data/models/weather_model.dart';
 
@@ -20,7 +20,7 @@ const CACHED_WEATHER = 'CACHED_WEATHER';
 class WeatherLocalDataIpml implements WeatherLocalData {
   final SharedPreferences sharedPreferences;
 
-  WeatherLocalDataIpml(@required this.sharedPreferences);
+  WeatherLocalDataIpml(this.sharedPreferences);
 
   @override
   Future<void> cacheWeather(WeatherModel weatherToCache) {
