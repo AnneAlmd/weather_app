@@ -64,7 +64,7 @@ void main() {
         final expected = [
           bloc.initialState,
           Loading(),
-          Error(message: 'server failure'),
+          Error(message: 'Server Failure'),
         ];
         expectLater(bloc.stream, emitsInOrder(expected));
         //act

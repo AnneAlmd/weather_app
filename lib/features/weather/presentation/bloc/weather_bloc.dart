@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -30,9 +29,20 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       // print('print city EVENT ${event.cityEvent}');
       // print('print city EVENT ${inputEither.toString()}');
       yield inputEither.fold(
-        (failure) => Error(message: 'server failure'),
+        (failure) => Error(message: _mapFailureToMessage(failure)),
         (weather) => Loaded(weather: weather),
       );
+    }
+  }
+
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
+      case ServerFailure:
+        return 'Server Failure';
+      case CacheFailure:
+        return 'Cache Failure';
+      default:
+        return 'Unexpected Error';
     }
   }
 }
