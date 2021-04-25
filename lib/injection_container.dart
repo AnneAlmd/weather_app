@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,12 +15,12 @@ import 'package:http/http.dart' as http;
 // service locator
 final sl = GetIt.instance;
 
-void init() async {
+Future<void> init() async {
   // Features - weather
   //* *  1 BLoC has streams to been closed
-  sl.registerFactory(() => WeatherBloc(getWeather: sl()));
+  sl.registerFactory<WeatherBloc>(() => WeatherBloc(getWeather: sl()));
   //* * 2 Use Cases
-  sl.registerLazySingleton(() => GetWeather(sl()));
+  sl.registerLazySingleton<GetWeather>(() => GetWeather(sl()));
   //* * 3 Repository
   sl.registerLazySingleton<WheatherRepository>(() =>
       WeatherRepositoryIpml(remoteData: sl(), localData: sl(), network: sl()));
@@ -33,7 +35,8 @@ void init() async {
   // External
   //* * 6 sharedPreferences
   final sharedPreferences = await SharedPreferences.getInstance();
-  sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => http.Client);
-  sl.registerLazySingleton(() => DataConnectionChecker());
+  sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+  sl.registerLazySingleton(() => http.Client());
+  sl.registerLazySingleton<DataConnectionChecker>(
+      () => DataConnectionChecker());
 }
